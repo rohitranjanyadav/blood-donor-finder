@@ -12,7 +12,7 @@ app.use(cors({ origin: process.env.CLIENT_URL }));
 app.use(express.json());
 
 // Routes
-// app.use("/api/auth", require("./routes/auth"));
+app.use("/api/auth", require("./routes/authRoute"));
 // app.use("/api/donors", require("./routes/donors"));
 // app.use("/api/requests", require("./routes/requests"));
 // app.use("/api/donations", require("./routes/donations"));
