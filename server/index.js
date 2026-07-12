@@ -16,7 +16,7 @@ app.use("/api/auth", require("./routes/authRoute"));
 app.use("/api/donors", require("./routes/donorsRoute"));
 app.use("/api/requests", require("./routes/requestsRoute"));
 app.use("/api/donations", require("./routes/donationsRoute"));
-// app.use("/api/admin", require("./routes/admin"));
+app.use("/api/admin", require("./routes/adminRoute"));
 
 // Health check
 app.get("/", (req, res) => {

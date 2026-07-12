@@ -10,8 +10,16 @@ const { verifyToken, requireRole } = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
-// Public — no auth needed (map shows all active requests)
 router.get("/active", getActiveRequests);
+
+// View own requests
+router.get(
+  "/my/requests",
+  verifyToken,
+  requireRole("patient", "hospital", "admin"),
+  getMyRequests,
+);
+
 router.get("/:id", getRequestById);
 
 // Patient or hospital can post a request

@@ -176,7 +176,7 @@ const registerHospital = async (req, res) => {
       });
     }
 
-    const hashedPassword = bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     const result = await pool.query(
       `INSERT INTO hospitals (hospital_name, email, password, phone, address, license_no)
@@ -250,13 +250,21 @@ const login = async (req, res) => {
     // Check hospitals table
     if (!user) {
       result = await pool.query(
-        `SELECT hospital_id AS id, hospital_name AS full_name, email, password, is_verified, 'hospital' AS role
-        FROM hospitals WHERE email = $1`,
+        `SELECT hospital_id AS id, hospital_name AS full_name, email, password,
+            is_verified, 'hospital' AS role
+          FROM hospitals WHERE email = $1`,
         [email],
       );
+
+      console.log("Hospital query rows:", result.rows.length);
+
       if (result.rows.length > 0) {
         user = result.rows[0];
         role = "hospital";
+
+        console.log("Hospital found:", user.full_name);
+        console.log("is_verified:", user.is_verified);
+        console.log("password hash exists:", !!user.password);
 
         if (!user.is_verified) {
           return res.status(403).json({
@@ -289,7 +297,12 @@ const login = async (req, res) => {
     }
 
     // Verify password
+    console.log("Comparing password for role:", role);
+    console.log("user.password defined:", !!user.password);
+
+    // Verify password
     const isMatch = await bcrypt.compare(password, user.password);
+    console.log("Password match result:", isMatch);
 
     if (!isMatch) {
       return res.status(401).json({
