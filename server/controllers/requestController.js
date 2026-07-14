@@ -1,5 +1,10 @@
 const pool = require("../config/db");
 const { sendDonorAlerts } = require("../services/emailService");
+const {
+  matchDonors,
+  getPriorityScore,
+  sortRequestsByPriority,
+} = require("../services/matchingService");
 
 // ── CREATE REQUEST (triggers email matching) ─────────────────────
 const createRequest = async (req, res) => {
@@ -59,16 +64,21 @@ const createRequest = async (req, res) => {
 
     // 2. Find all matching donors
     const donorResult = await pool.query(
-      `SELECT donor_id, full_name, email, blood_group
+      `SELECT donor_id, full_name, email, blood_group,latitude,longitude,address
       FROM donors
-      WHERE blood_group = $1 AND is_active = true`,
-      [blood_group],
+      WHERE is_active = true`,
     );
 
-    console.log(donorResult);
-    console.log(donorResult.rows);
+    // 3. DSA algo - matchDonors
+    const matchedDonors = matchDonors(
+      donorResult.rows,
+      blood_group,
+      latitude,
+      longitude,
+    );
 
-    const matchedDonors = donorResult.rows;
+    // 4. Get priority for this request
+    const priority = getPriorityScore(deadline);
 
     // 3. Send emails asynchronously
     if (matchedDonors.length > 0) {
@@ -78,7 +88,14 @@ const createRequest = async (req, res) => {
     res.status(201).json({
       message: "Request posted successfully",
       request: newRequest,
+      priority: priority,
       donors_alerted: matchedDonors.length,
+      nearest_donor: matchedDonors[0]
+        ? {
+            name: matchedDonors[0].full_name,
+            distance_km: matchedDonors[0].distance_km,
+          }
+        : null,
     });
   } catch (err) {
     console.error("createRequest error:", err.message);
@@ -88,21 +105,27 @@ const createRequest = async (req, res) => {
   }
 };
 
-// ── GET ALL ACTIVE REQUESTS (public — for map) ───────────────────
+// ── GET ALL ACTIVE REQUESTS (public & with priority sorting) ─────────────────
 const getActiveRequests = async (req, res) => {
   try {
     const result = await pool.query(
-      `SELECT request_id, blood_group, quantity, deadline,hospital_name, longitude,
-       notes, status, created_at
+      `SELECT
+         request_id, blood_group, quantity, deadline,
+         hospital_name, address, latitude, longitude,
+         notes, status, created_at,
+         (SELECT COUNT(*) FROM email_logs e
+          WHERE e.request_id = requests.request_id
+          AND   e.delivery_status = 'sent') AS donors_alerted
        FROM requests
-       WHERE status = 'open'
-       ORDER BY created_at DESC
-      
-      `,
+       WHERE status = 'open'`,
     );
+
+    // Priority Scoring
+    const prioritized = sortRequestsByPriority(result.rows);
+
     res.json({
-      total: result.rows.length,
-      requests: result.rows,
+      total: prioritized.length,
+      requests: prioritized,
     });
   } catch (err) {
     console.error("getActiveRequests error:", err.message);
@@ -131,7 +154,10 @@ const getRequestById = async (req, res) => {
       });
     }
 
-    res.json(result.rows[0]);
+    const request = result.rows[0];
+    const priority = getPriorityScore(request.deadline);
+
+    res.json({ ...request, ...priority });
   } catch (err) {
     console.error("getRequestById error:", err.message);
     res.status(500).json({ error: "Server error" });
@@ -187,9 +213,11 @@ const getMyRequests = async (req, res) => {
       [req.user.id, req.user.role],
     );
 
+    const withPriority = sortRequestsByPriority(result.rows);
+
     res.json({
-      total: result.rows.length,
-      requests: result.rows,
+      total: withPriority.length,
+      requests: withPriority,
     });
   } catch (err) {
     console.error("getMyRequests error:", err.message);
