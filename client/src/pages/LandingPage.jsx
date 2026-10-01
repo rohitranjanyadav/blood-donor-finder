@@ -277,7 +277,7 @@ export default function LandingPage() {
               </h1>
 
               <p className="text-lg text-gray-600 leading-relaxed mb-8 max-w-md">
-                BloodNet connects donors to patients in under 60 seconds. Post a
+                JeevanRakta connects donors to patients in under 60 seconds. Post a
                 request, get matched by blood type and location, confirm a donor
                 — no phone calls.
               </p>
