@@ -1,6 +1,7 @@
 const express = require("express");
 const { verifyToken, requireRole } = require("../middleware/authMiddleware");
 const {
+  getDonorCount,
   getMyProfile,
   updateMyProfile,
   toggleStatus,
@@ -10,6 +11,7 @@ const {
 
 const router = express.Router();
 
+router.get("/count", getDonorCount);
 router.get("/me", verifyToken, requireRole("donor"), getMyProfile);
 router.put("/me", verifyToken, requireRole("donor"), updateMyProfile);
 router.patch("/me/status", verifyToken, requireRole("donor"), toggleStatus);

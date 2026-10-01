@@ -1,5 +1,15 @@
 const pool = require("../config/db");
 
+const getDonorCount = async (req, res) => {
+  try {
+    const result = await pool.query("SELECT COUNT(*) FROM donors");
+    res.json({ total: parseInt(result.rows[0].count, 10) });
+  } catch (err) {
+    console.error("getDonorCount error:", err.message);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
 // ── GET MY PROFILE ───────────────────────────────────────────────
 const getMyProfile = async (req, res) => {
   try {
@@ -129,6 +139,7 @@ const getAllDonors = async (req, res) => {
 };
 
 module.exports = {
+  getDonorCount,
   getAllDonors,
   getMyHistory,
   getMyProfile,
