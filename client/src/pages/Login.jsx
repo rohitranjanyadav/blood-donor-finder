@@ -10,29 +10,34 @@ import api from '../api/axios'
 const BLOOD_GROUPS = ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-']
 
 const roles = [
-  { id: 'donor',    label: 'Donor',    sub: 'I want to donate',       icon: Heart    },
-  { id: 'patient',  label: 'Patient',  sub: 'I need blood',           icon: Users    },
+  { id: 'donor', label: 'Donor', sub: 'I want to donate', icon: Heart },
+  { id: 'patient', label: 'Patient', sub: 'I need blood', icon: Users },
   { id: 'hospital', label: 'Hospital', sub: 'Representing a hospital', icon: Hospital },
 ]
 
-const roleRedirect = { donor: '/dashboard', patient: '/map', hospital: '/map', admin: '/admin' }
+const roleRedirect = {
+  donor: '/dashboard',
+  patient: '/my-requests',
+  hospital: '/my-requests',
+  admin: '/admin',
+}
 
 export default function Login() {
-  const { login }  = useAuth()
-  const navigate   = useNavigate()
+  const { login } = useAuth()
+  const navigate = useNavigate()
   const isRegister = window.location.pathname.includes('register')
 
   // Detect which register page we're on from URL
-  const pathRole = window.location.pathname.includes('donor')    ? 'donor'
-                 : window.location.pathname.includes('patient')  ? 'patient'
-                 : window.location.pathname.includes('hospital') ? 'hospital'
-                 : null
+  const pathRole = window.location.pathname.includes('donor') ? 'donor'
+    : window.location.pathname.includes('patient') ? 'patient'
+      : window.location.pathname.includes('hospital') ? 'hospital'
+        : null
 
-  const [showPw,      setShowPw]      = useState(false)
-  const [selectedRole,setSelectedRole]= useState(pathRole || 'donor')
-  const [loading,     setLoading]     = useState(false)
-  const [success,     setSuccess]     = useState(false)
-  const [error,       setError]       = useState('')
+  const [showPw, setShowPw] = useState(false)
+  const [selectedRole, setSelectedRole] = useState(pathRole || 'donor')
+  const [loading, setLoading] = useState(false)
+  const [success, setSuccess] = useState(false)
+  const [error, setError] = useState('')
   const [hospitalPending, setHospitalPending] = useState(false)
 
   const [form, setForm] = useState({
@@ -42,7 +47,7 @@ export default function Login() {
   })
 
   const handle = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }))
-  const view   = pathRole !== null ? 'register' : 'login'
+  const view = pathRole !== null ? 'register' : 'login'
 
   const submit = async e => {
     e.preventDefault()
@@ -66,12 +71,16 @@ export default function Login() {
         setTimeout(() => navigate(roleRedirect[data.user.role] || '/'), 800)
       } else {
         const payload = selectedRole === 'donor'
-          ? { full_name: form.full_name, email: form.email, password: form.password,
-              blood_group: form.blood_group, phone: form.phone, address: form.address }
+          ? {
+            full_name: form.full_name, email: form.email, password: form.password,
+            blood_group: form.blood_group, phone: form.phone, address: form.address
+          }
           : selectedRole === 'patient'
-          ? { full_name: form.full_name, email: form.email, password: form.password, phone: form.phone }
-          : { hospital_name: form.hospital_name, email: form.email, password: form.password,
-              phone: form.phone, address: form.address, license_no: form.license_no }
+            ? { full_name: form.full_name, email: form.email, password: form.password, phone: form.phone }
+            : {
+              hospital_name: form.hospital_name, email: form.email, password: form.password,
+              phone: form.phone, address: form.address, license_no: form.license_no
+            }
 
         const { data } = await api.post(`/auth/register/${selectedRole}`, payload)
 
@@ -132,7 +141,7 @@ export default function Login() {
             <span className="text-xl font-bold text-white">BloodNet</span>
           </div>
           <h2 className="text-4xl text-white mb-4 leading-tight"
-              style={{ fontFamily: 'var(--font-heading)' }}>
+            style={{ fontFamily: 'var(--font-heading)' }}>
             {view === 'login' ? 'Good to have\nyou back.' : 'Join the\nnetwork.'}
           </h2>
           <p className="text-red-200 text-base leading-relaxed max-w-xs">
@@ -143,12 +152,12 @@ export default function Login() {
         </div>
 
         <div>
-          {[['1,200+','Registered donors'],['< 60s','Alert speed'],['93%','Requests fulfilled']].map(([v,l]) => (
+          {[['1,200+', 'Registered donors'], ['< 60s', 'Alert speed'], ['93%', 'Requests fulfilled']].map(([v, l]) => (
             <div key={l} className="flex items-center justify-between py-3.5
                                      border-b border-red-500/40 last:border-0">
               <span className="text-red-200 text-sm">{l}</span>
               <span className="font-mono font-bold text-white"
-                    style={{ fontFamily: 'var(--font-code)' }}>{v}</span>
+                style={{ fontFamily: 'var(--font-code)' }}>{v}</span>
             </div>
           ))}
         </div>
@@ -197,8 +206,8 @@ export default function Login() {
                         onClick={() => setSelectedRole(r.id)}
                         className={`border-2 rounded-xl p-3 text-center transition-all
                                     ${selectedRole === r.id
-                                      ? 'border-red-500 bg-red-50'
-                                      : 'border-gray-100 hover:border-gray-200'}`}>
+                            ? 'border-red-500 bg-red-50'
+                            : 'border-gray-100 hover:border-gray-200'}`}>
                         <r.icon size={18}
                           className={`mx-auto mb-1.5 ${selectedRole === r.id ? 'text-red-600' : 'text-gray-400'}`} />
                         <div className={`text-xs font-bold ${selectedRole === r.id ? 'text-red-700' : 'text-gray-600'}`}>
@@ -292,8 +301,8 @@ export default function Login() {
                             onClick={() => setForm(f => ({ ...f, blood_group: bg }))}
                             className={`py-2.5 rounded-xl text-sm font-bold border-2 transition-all
                                         ${form.blood_group === bg
-                                          ? 'bg-red-700 border-red-700 text-white'
-                                          : 'bg-white border-gray-200 text-gray-700 hover:border-red-400'}`}>
+                                ? 'bg-red-700 border-red-700 text-white'
+                                : 'bg-white border-gray-200 text-gray-700 hover:border-red-400'}`}>
                             {bg}
                           </button>
                         ))}
@@ -378,7 +387,7 @@ export default function Login() {
                     <>
                       <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none">
                         <circle cx="12" cy="12" r="10" stroke="currentColor"
-                                strokeWidth="3" strokeDasharray="30 70" />
+                          strokeWidth="3" strokeDasharray="30 70" />
                       </svg>
                       One moment...
                     </>
