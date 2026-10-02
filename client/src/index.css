@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Lato:wght@400;700;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
 @import 'tailwindcss';
 
 @theme inline {
@@ -13,22 +13,22 @@
 }
 
 :root {
-  --background: #fafafa;
-  --foreground: #111111;
+  --background: #fcfcfc;
+  --foreground: #1a2b49;
   --card: #ffffff;
-  --primary: #c0392b;
-  --primary-dark: #922b21;
-  --secondary: #f1f5f9;
-  --muted: #f3f4f6;
-  --muted-foreground: #6b7280;
-  --border: #e5e7eb;
-  --success: #16a34a;
-  --warning: #d97706;
-  --danger: #dc2626;
-  --info: #2563eb;
-  --radius: 12px;
-  --font-body: 'Inter', sans-serif;
-  --font-heading: 'DM Serif Display', serif;
+  --primary: #c62828;
+  --primary-dark: #991f1f;
+  --secondary: #f4f6f8;
+  --muted: #eef2f5;
+  --muted-foreground: #5f6f82;
+  --border: #dce3ea;
+  --success: #218568;
+  --warning: #b7791f;
+  --danger: #c62828;
+  --info: #4b9fa7;
+  --radius: 10px;
+  --font-body: 'Lato', sans-serif;
+  --font-heading: 'Plus Jakarta Sans', sans-serif;
   --font-code: 'DM Mono', monospace;
 }
 
@@ -47,6 +47,27 @@ body,
   font-family: var(--font-body);
   background-color: var(--background);
   color: var(--foreground);
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  letter-spacing: 0;
 }
 
 .font-heading {

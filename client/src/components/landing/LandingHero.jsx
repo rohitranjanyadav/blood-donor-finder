@@ -69,7 +69,7 @@ export default function LandingHero() {
               Nepal's Blood Donor Platform
             </div>
             <h1
-              className="font-heading text-5xl lg:text-[3.75rem] text-gray-900 leading-[1.1] mb-6"
+              className="font-heading text-4xl lg:text-5xl text-gray-900 leading-[1.12] mb-6"
               style={{ fontFamily: "var(--font-heading)" }}
             >
               Blood, when
