@@ -186,12 +186,12 @@ export default function AuthForm({
         )}
 
         <TextField
-          type="email"
-          label="Email"
+          type={isRegister ? "email" : "text"}
+          label={isRegister ? "Email" : "Email or username"}
           name="email"
           value={form.email}
           onChange={onChange}
-          placeholder="you@example.com"
+          placeholder="you@example.com or admin username"
           required
         />
 

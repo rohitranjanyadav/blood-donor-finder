@@ -279,7 +279,7 @@ const login = async (req, res) => {
     if (!user) {
       result = await pool.query(
         `SELECT admin_id AS id, username AS full_name, email, password, 'admin' AS role
-        FROM admin_users WHERE email = $1`,
+        FROM admin_users WHERE email = $1 OR username = $1`,
         [email],
       );
 

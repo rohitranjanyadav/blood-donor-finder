@@ -196,7 +196,7 @@ const cancelRequest = async (req, res) => {
   const { id } = req.params;
   try {
     const result = await pool.query(
-      `UPDATE requests SET status = 'cancelled
+      `UPDATE requests SET status = 'cancelled'
       WHERE request_id = $1
       RETURNING request_id, blood_group, hospital_name, status`,
       [id],
