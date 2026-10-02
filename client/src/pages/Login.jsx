@@ -34,6 +34,7 @@ export default function Login() {
   const navigate = useNavigate();
   const pathRole = getPathRole();
   const view = pathRole ? "register" : "login";
+  const goBack = () => navigate("/", { replace: true });
 
   const [showPassword, setShowPassword] = useState(false);
   const [selectedRole, setSelectedRole] = useState(pathRole || "donor");
@@ -125,17 +126,18 @@ export default function Login() {
       className="min-h-screen bg-gray-50 flex"
       style={{ fontFamily: "var(--font-body)" }}
     >
-      <AuthBrandPanel view={view} donors={donorCount} />
+      <AuthBrandPanel view={view} donors={donorCount} onBack={goBack} />
 
       <main className="flex-1 flex flex-col justify-center px-6 py-12 lg:px-14 xl:px-20">
         <div className="max-w-md w-full mx-auto">
-          <Link
-            to="/"
+          <button
+            type="button"
+            onClick={goBack}
             className="flex items-center gap-1.5 text-gray-400 hover:text-gray-700
-                       mb-8 lg:hidden text-sm no-underline"
+                       mb-8 lg:hidden text-sm bg-transparent border-0 p-0"
           >
             <ArrowLeft size={13} /> Back
-          </Link>
+          </button>
 
           <h1 className="text-2xl font-bold text-gray-900 mb-1">
             {view === "login" ? "Sign in" : "Create account"}

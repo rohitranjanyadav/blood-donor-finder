@@ -1,7 +1,6 @@
-import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 
-export default function AuthBrandPanel({ view, donors }) {
+export default function AuthBrandPanel({ view, donors, onBack }) {
   const stats = [
     [donors, "Registered donors"],
     ["< 60s", "Alert speed"],
@@ -14,17 +13,18 @@ export default function AuthBrandPanel({ view, donors }) {
         src="/assets/illustrations/auth-bg.svg"
         alt=""
         aria-hidden="true"
-        className="absolute inset-0 w-full h-full object-cover opacity-20"
+        className="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none"
       />
-      <div>
-        <Link
-          to="/"
+      <div className="relative z-10">
+        <button
+          type="button"
+          onClick={onBack}
           className="flex items-center gap-2 text-red-300 hover:text-white
-                     transition-colors mb-14 text-sm font-medium no-underline"
+                     transition-colors mb-14 text-sm font-medium bg-transparent border-0 p-0 cursor-pointer"
         >
           <ArrowLeft size={14} />
           Back
-        </Link>
+        </button>
         <div className="flex items-center gap-2 mb-10">
           <div className="w-9 h-9 bg-white/20 rounded-xl flex items-center justify-center">
             <img
@@ -50,7 +50,7 @@ export default function AuthBrandPanel({ view, donors }) {
         </p>
       </div>
 
-      <div>
+      <div className="relative z-10 ">
         {stats.map(([value, label]) => (
           <div
             key={label}

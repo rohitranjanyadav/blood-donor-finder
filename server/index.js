@@ -13,6 +13,7 @@ app.use(express.json());
 
 // Routes
 app.use("/api/auth", require("./routes/authRoute"));
+app.use("/api/public", require("./routes/publicRoute"));
 app.use("/api/donors", require("./routes/donorsRoute"));
 app.use("/api/requests", require("./routes/requestsRoute"));
 app.use("/api/donations", require("./routes/donationsRoute"));

@@ -1,12 +1,36 @@
+import { useEffect, useState } from "react";
 import { Bell, CheckCircle2, ChevronRight, Heart, Users, Activity, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import { features, steps, roleCards, testimonials } from "./landingData";
+import api from "../../api/axios";
 
 function SectionHeading({ title, description }) { return <div className="max-w-xl mb-14"><h2 className="text-4xl text-gray-900 mb-3" style={{ fontFamily: "var(--font-heading)" }}>{title}</h2>{description && <p className="text-gray-500 text-lg">{description}</p>}</div>; }
 
 export function LandingStats() {
-  const stats = [["1,200+", "Registered Donors", Users], ["< 60s", "Alert Speed", Bell], ["4", "DSA Algorithms", Activity], ["93%", "Requests Fulfilled", Heart]];
-  return <section className="bg-red-600 py-14"><div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">{stats.map(([value, label, Icon]) => <div key={label}><Icon size={24} className="text-red-300 mx-auto mb-2" /><div className="font-mono text-3xl font-bold text-white" style={{ fontFamily: "var(--font-code)" }}>{value}</div><div className="text-red-200 text-sm mt-1">{label}</div></div>)}</div></div></section>;
+  const [stats, setStats] = useState(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    api.get("/public/stats").then(({ data }) => {
+      if (!cancelled) setStats(data);
+    }).catch(() => {
+      if (!cancelled) setStats({});
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const cards = [
+    [stats?.total_donors != null ? `${stats.total_donors.toLocaleString()}+` : "—", "Registered Donors", Users],
+    ["< 60s", "Alert Speed", Bell],
+    [stats?.total_donations != null ? stats.total_donations.toLocaleString() : "—", "Donations Logged", Activity],
+    [stats?.fulfillment_rate != null ? `${stats.fulfillment_rate}%` : "—", "Requests Fulfilled", Heart],
+  ];
+
+  return <section className="bg-red-600 py-14 relative overflow-hidden"><div className="absolute inset-0 bg-linear-to-r from-red-700/30 via-transparent to-red-500/20 pointer-events-none" /><div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative"><div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">{cards.map(([value, label, Icon]) => <div key={label}><Icon size={24} className="text-red-200 mx-auto mb-2" /><div className="font-mono text-3xl font-bold text-white" style={{ fontFamily: "var(--font-code)" }}>{value}</div><div className="text-red-100 text-sm mt-1">{label}</div></div>)}</div></div></section>;
 }
 
 export function FeaturesSection() { return <section id="features" className="py-24 bg-white"><div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><SectionHeading title="Six tools. One network." description="Each one cuts a specific friction point between a donor and a patient." /><div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">{features.map(([Icon, title, color, description]) => <div key={title} className="border border-gray-100 rounded-2xl p-6 hover:border-red-100 hover:shadow-lg hover:shadow-red-50/60 transition-all"><div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-4 ${color}`}><Icon size={20} /></div><h3 className="font-semibold text-gray-900 mb-2 text-[15px]">{title}</h3><p className="text-sm text-gray-500 leading-relaxed">{description}</p></div>)}</div></div></section>; }
