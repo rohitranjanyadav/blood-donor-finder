@@ -9,6 +9,12 @@ export default function PendingHospitals({ hospitals, onVerify, onReject }) {
       </h2>
       {hospitals.length === 0 ? (
         <div className="bg-white border border-gray-100 rounded-2xl p-12 text-center">
+          <img
+            src="/assets/illustrations/empty-state.svg"
+            alt=""
+            aria-hidden="true"
+            className="w-28 h-28 mx-auto mb-3"
+          />
           <CheckCircle2 size={40} className="text-green-400 mx-auto mb-3" />
           <h3 className="font-semibold text-gray-600 text-sm">All caught up</h3>
           <p className="text-xs text-gray-400 mt-1">

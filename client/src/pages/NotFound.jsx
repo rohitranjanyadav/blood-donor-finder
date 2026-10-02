@@ -5,6 +5,11 @@ const NotFound = () => (
     className="min-h-screen flex flex-col items-center
                   justify-center gap-4 bg-gray-50"
   >
+    <img
+      src="/assets/illustrations/not-found.svg"
+      alt="Page not found"
+      className="w-56 h-56"
+    />
     <span className="text-8xl font-bold text-red-700">404</span>
     <p className="text-gray-500 text-lg">Page not found</p>
     <Link

@@ -1,4 +1,5 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import { LogOut, Map, Settings, User } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
 
 const Navbar = () => {
@@ -13,32 +14,40 @@ const Navbar = () => {
   const isActive = (path) => location.pathname === path;
 
   const linkClass = (path) =>
-    `px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+    `px-3 py-2 rounded-lg text-sm font-medium transition-colors no-underline ${
       isActive(path)
-        ? "bg-white/10 text-white"
-        : "text-gray-400 hover:text-white hover:bg-white/10"
+        ? "bg-red-50 text-red-700"
+        : "text-gray-500 hover:text-gray-900 hover:bg-gray-50"
     }`;
 
   return (
     <nav
-      className="bg-[#1B2631] px-6 h-16 flex items-center
-                    justify-between sticky top-0 z-50
-                    shadow-[0_2px_12px_rgba(0,0,0,0.3)]"
+      className="bg-white/95 backdrop-blur-sm border-b border-gray-100
+                 px-4 sm:px-6 lg:px-8 h-16 flex items-center
+                 justify-between sticky top-0 z-50"
     >
       {/* Logo */}
       <Link
         to="/"
-        className="flex items-center gap-2 text-white
+        className="flex items-center gap-2 text-gray-900
                    no-underline font-bold text-lg hover:opacity-90"
       >
-        <span className="text-2xl">🩸</span>
+        <span className="w-8 h-8 bg-red-600 rounded-lg flex items-center justify-center">
+          <img
+            src="/assets/brand/logo-mark.svg"
+            alt="JeevanRakta"
+            className="w-6 h-6"
+          />
+        </span>
         <span className="tracking-wide">JeevanRakta</span>
       </Link>
 
       {/* Right side links */}
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-1 sm:gap-2">
         <Link to="/map" className={linkClass("/map")}>
-          🗺 Live Map
+          <span className="flex items-center gap-1.5">
+            <Map size={15} /> Live Map
+          </span>
         </Link>
 
         {/* Guest */}
@@ -49,7 +58,7 @@ const Navbar = () => {
             </Link>
             <Link
               to="/register/donor"
-              className="bg-red-700 hover:bg-red-800 text-white
+              className="bg-red-600 hover:bg-red-700 text-white
                          px-4 py-2 rounded-lg text-sm font-semibold
                          no-underline transition-colors"
             >
@@ -75,7 +84,9 @@ const Navbar = () => {
         {/* Admin */}
         {user?.role === "admin" && (
           <Link to="/admin" className={linkClass("/admin")}>
-            ⚙ Admin
+            <span className="flex items-center gap-1.5">
+              <Settings size={15} /> Admin
+            </span>
           </Link>
         )}
 
@@ -83,13 +94,14 @@ const Navbar = () => {
         {user && (
           <div className="flex items-center gap-3 ml-2">
             <div
-              className="flex items-center gap-2 bg-white/10
-                            text-white px-3 py-1.5 rounded-lg text-sm"
+              className="flex items-center gap-2 bg-gray-50 border border-gray-100
+                         text-gray-700 px-3 py-1.5 rounded-lg text-sm"
             >
-              <span>👤 {user.full_name?.split(" ")[0] || user.username}</span>
+              <User size={14} className="text-gray-400" />
+              <span>{user.full_name?.split(" ")[0] || user.username}</span>
               {user.blood_group && (
                 <span
-                  className="bg-red-700 text-white text-xs
+                  className="bg-red-600 text-white text-xs
                                   font-bold px-2 py-0.5 rounded"
                 >
                   {user.blood_group}
@@ -98,11 +110,12 @@ const Navbar = () => {
             </div>
             <button
               onClick={handleLogout}
-              className="text-gray-400 hover:text-white border
-                         border-white/20 hover:border-white/40
+              className="flex items-center gap-1.5 text-gray-500 hover:text-red-700 border
+                         border-gray-200 hover:border-red-200
                          px-3 py-1.5 rounded-lg text-sm
-                         cursor-pointer transition-colors bg-transparent"
+                         cursor-pointer transition-colors bg-white"
             >
+              <LogOut size={14} />
               Logout
             </button>
           </div>

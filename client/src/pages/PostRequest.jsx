@@ -9,9 +9,9 @@ import { useAuth } from '../context/AuthContext'
 
 delete L.Icon.Default.prototype._getIconUrl
 L.Icon.Default.mergeOptions({
-  iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png',
-  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png',
-  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
+  iconUrl: '/assets/markers/marker-me.svg',
+  iconRetinaUrl: '/assets/markers/marker-me.svg',
+  shadowUrl: '',
 })
 
 const BLOOD_GROUPS = ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-']
@@ -70,6 +70,12 @@ export default function PostRequest() {
         style={{ fontFamily: 'var(--font-body)' }}>
         <div className="bg-white border border-gray-100 rounded-2xl shadow-sm
                         p-10 max-w-md w-full text-center">
+          <img
+            src="/assets/illustrations/success.svg"
+            alt=""
+            aria-hidden="true"
+            className="w-32 h-32 mx-auto mb-2"
+          />
           <CheckCircle2 size={52} className="text-green-500 mx-auto mb-4" />
           <h2 className="text-xl font-bold text-gray-900 mb-2">
             Request posted

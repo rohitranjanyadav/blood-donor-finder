@@ -1,5 +1,11 @@
 import { roles } from "./authConfig";
 
+const roleImages = {
+  donor: "/assets/icons/role-donor.svg",
+  patient: "/assets/icons/role-patient.svg",
+  hospital: "/assets/icons/role-hospital.svg",
+};
+
 export default function RoleSelector({ selectedRole, onSelect }) {
   return (
     <div className="mb-6">
@@ -19,9 +25,11 @@ export default function RoleSelector({ selectedRole, onSelect }) {
                             : "border-gray-100 hover:border-gray-200"
                         }`}
           >
-            <role.icon
-              size={18}
-              className={`mx-auto mb-1.5 ${selectedRole === role.id ? "text-red-600" : "text-gray-400"}`}
+            <img
+              src={roleImages[role.id]}
+              alt=""
+              aria-hidden="true"
+              className="w-7 h-7 mx-auto mb-1.5"
             />
             <div
               className={`text-xs font-bold ${selectedRole === role.id ? "text-red-700" : "text-gray-600"}`}

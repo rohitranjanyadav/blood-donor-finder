@@ -9,7 +9,13 @@ export default function AuthBrandPanel({ view, donors }) {
   ];
 
   return (
-    <div className="hidden lg:flex lg:w-[42%] bg-red-600 flex-col justify-between p-12">
+    <div className="hidden lg:flex lg:w-[42%] bg-red-600 flex-col justify-between p-12 relative overflow-hidden">
+      <img
+        src="/assets/illustrations/auth-bg.svg"
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 w-full h-full object-cover opacity-20"
+      />
       <div>
         <Link
           to="/"
@@ -21,7 +27,11 @@ export default function AuthBrandPanel({ view, donors }) {
         </Link>
         <div className="flex items-center gap-2 mb-10">
           <div className="w-9 h-9 bg-white/20 rounded-xl flex items-center justify-center">
-            <img src="../../public/logo.jpg" alt="JeevanRakta Logo" />
+            <img
+              src="/assets/brand/logo-mark.svg"
+              alt="JeevanRakta Logo"
+              className="w-6 h-6"
+            />
           </div>
           <span className="text-xl font-bold text-white">JeevanRakta</span>
         </div>

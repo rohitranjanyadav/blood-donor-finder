@@ -7,35 +7,12 @@ import { Droplets, Clock, MapPin, AlertCircle, RefreshCw } from 'lucide-react'
 import Spinner from '../components/ui/Spinner'
 import api from '../api/axios'
 
-// Fix Leaflet default icon
-delete L.Icon.Default.prototype._getIconUrl
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png',
-  iconUrl:       'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png',
-  shadowUrl:     'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
+const requestIcon = new L.Icon({
+  iconUrl: '/assets/markers/marker-request.svg',
+  iconSize: [40, 40],
+  iconAnchor: [20, 40],
+  popupAnchor: [0, -38],
 })
-
-// Custom coloured icons by urgency
-const makeIcon = color => new L.DivIcon({
-  html: `<div style="
-    width:32px; height:32px; border-radius:50% 50% 50% 0;
-    background:${color}; border:3px solid white;
-    transform:rotate(-45deg);
-    box-shadow:0 2px 8px rgba(0,0,0,0.3);"
-  ></div>`,
-  className: '',
-  iconSize: [32, 32],
-  iconAnchor: [16, 32],
-  popupAnchor: [0, -34],
-})
-
-const icons = {
-  CRITICAL: makeIcon('#C0392B'),
-  URGENT:   makeIcon('#D35400'),
-  MODERATE: makeIcon('#2471A3'),
-  NORMAL:   makeIcon('#1E8449'),
-  default:  makeIcon('#7F8C8D'),
-}
 
 const BLOOD_GROUPS = ['All','A+','A-','B+','B-','O+','O-','AB+','AB-']
 
@@ -177,7 +154,7 @@ export default function RequestMap() {
               <Marker
                 key={r.request_id}
                 position={[r.latitude, r.longitude]}
-                icon={icons[r.urgency_label] || icons.default}
+                icon={requestIcon}
                 eventHandlers={{ click: () => setSelected(r) }}
               >
                 <Popup>
