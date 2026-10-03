@@ -47,7 +47,7 @@ export default function LandingHero() {
 
   return (
     <section
-      className="relative overflow-hidden pt-20 pb-28"
+      className="relative overflow-hidden pt-20 pb-20"
       style={{
         background:
           "linear-gradient(135deg, #fef2f2 0%, #fff 50%, #f8fafc 100%)",
@@ -81,7 +81,7 @@ export default function LandingHero() {
               a request, get matched by blood type and location, confirm a donor
               — no phone calls.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 mb-12">
+            <div className="flex flex-col sm:flex-row gap-3 mb-8">
               <Link
                 to="/register/donor"
                 className="flex items-center justify-center gap-2 bg-red-600 text-white font-semibold px-6 py-3.5 rounded-xl hover:bg-red-700 transition-all shadow-lg shadow-red-100 no-underline"

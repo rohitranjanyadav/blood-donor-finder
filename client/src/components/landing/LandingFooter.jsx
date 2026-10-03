@@ -1,5 +1,3 @@
-import { Droplets } from "lucide-react";
-
 const columns = [
   ["Platform", ["Donor Portal", "Patient Portal", "Hospital Portal", "Admin"]],
   ["Tech Stack", ["PostgreSQL", "Express.js", "React.js", "Node.js"]],
@@ -11,5 +9,5 @@ export function LandingCta() {
 }
 
 export default function LandingFooter() {
-  return <footer className="bg-gray-950 text-gray-400 py-16"><div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><div className="grid md:grid-cols-4 gap-10 mb-12"><div><div className="flex items-center gap-2 mb-4"><div className="w-7 h-7 bg-red-600 rounded-lg flex items-center justify-center"><img src="/assets/brand/logo-mark.svg" alt="JeevanRakta" className="w-5 h-5" /></div><span className="font-bold text-white">JeevanRakta</span></div><p className="text-sm leading-relaxed text-gray-500">Swastik College BCA Final Year Project. Built on the PERN stack.</p></div>{columns.map(([title, links]) => <div key={title}><h4 className="text-white font-semibold text-sm mb-4">{title}</h4><ul className="space-y-2">{links.map((link) => <li key={link}><span className="text-sm text-gray-500">{link}</span></li>)}</ul></div>)}</div><div className="pt-8 border-t border-gray-800 text-xs text-gray-600 text-center">© 2026 JeevanRakta · Built by Rohit Ranjan Yadav & Dil Krishna Laghu · Swastik College, Bhaktapur · Tribhuvan University</div></div></footer>;
+  return <footer className="bg-gray-950 text-gray-400 py-16"><div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><div className="grid md:grid-cols-4 gap-10 mb-12"><div><div className="flex items-center gap-2 mb-4"><div className="w-7 h-7 bg-red-600 rounded-lg flex items-center justify-center"><img src="/assets/brand/logo-mark.svg" alt="JeevanRakta" className="w-5 h-5" /></div><span className="font-bold text-white">JeevanRakta</span></div><p className="text-sm leading-relaxed text-gray-500">Swastik College BCA Final Year Project. Built on the PERN stack.</p></div>{columns.map(([title, links]) => <div key={title}><h3 className="text-white font-semibold text-sm mb-4">{title}</h3><ul className="space-y-2">{links.map((link) => <li key={link}><span className="text-sm text-gray-500">{link}</span></li>)}</ul></div>)}</div><div className="pt-8 border-t border-gray-800 text-xs text-gray-600 text-center">© 2026 JeevanRakta · Built by Rohit Ranjan Yadav & Dil Krishna Laghu · Swastik College, Bhaktapur · Tribhuvan University</div></div></footer>;
 }
