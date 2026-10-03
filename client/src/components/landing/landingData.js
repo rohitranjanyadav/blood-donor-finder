@@ -25,7 +25,7 @@ export const features = [
 export const steps = [
   ["01", "Register in 2 minutes", "Pick your role, set your blood type and location. No documents needed for donors."],
   ["02", "Post or find a request", "Patients and hospitals post what they need. Donors see matching requests nearby."],
-  ["03", "System matches you", "Binary search on blood type. Haversine formula sorts by distance. Nearest donor notified first."],
+  ["03", "Get matched instantly", "Our smart matching identifies the best donors based on blood type and proximity."],
   ["04", "Donate and log it", "Confirm at the hospital. The system records the donation and updates the request status."],
 ];
 

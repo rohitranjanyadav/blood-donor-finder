@@ -73,12 +73,13 @@ function DonorFields({ form, onChange, onBloodGroupSelect }) {
               key={bloodGroup}
               type="button"
               onClick={() => onBloodGroupSelect(bloodGroup)}
+              aria-pressed={form.blood_group === bloodGroup}
               className={`py-2.5 rounded-xl text-sm font-bold border-2 transition-all
                           ${
                             form.blood_group === bloodGroup
                               ? "bg-red-700 border-red-700 text-white"
                               : "bg-white border-gray-200 text-gray-700 hover:border-red-400"
-                          }`}
+                          } focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600`}
             >
               {bloodGroup}
             </button>

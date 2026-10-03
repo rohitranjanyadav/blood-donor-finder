@@ -158,7 +158,7 @@ export default function DashboardLayout({
         {/* Topbar */}
         <header
           className="bg-white border-b border-gray-100 px-4 lg:px-6
-                           py-3 flex items-center justify-between shrink-0"
+                           py-6 flex items-center justify-between shrink-0"
         >
           <div className="flex items-center gap-3">
             <button
@@ -168,11 +168,19 @@ export default function DashboardLayout({
               <Menu size={17} />
             </button>
             <div>
-              <h1 className="text-sm font-semibold text-gray-900">
+              <h1 className="text-lg font-bold text-gray-900 leading-tight">
                 {navItems.find((n) => n.id === activeTab)?.label || "Dashboard"}
               </h1>
               {userDetail && (
-                <p className="text-[11px] text-gray-400 mt-0.5">{userDetail}</p>
+                userDetail.startsWith("Blood Group:") ? (
+                  <p className="mt-1" aria-label={userDetail}>
+                    <span className="inline-flex font-mono font-bold text-red-700 bg-red-50 px-2 py-0.5 rounded text-xs" style={{ fontFamily: "var(--font-code)" }}>
+                      {userDetail.replace("Blood Group:", "").trim()}
+                    </span>
+                  </p>
+                ) : (
+                  <p className="text-xs text-gray-500 mt-1">{userDetail}</p>
+                )
               )}
             </div>
           </div>

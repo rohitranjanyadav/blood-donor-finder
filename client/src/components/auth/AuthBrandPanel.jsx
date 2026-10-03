@@ -1,6 +1,4 @@
-import { ArrowLeft } from "lucide-react";
-
-export default function AuthBrandPanel({ view, donors, onBack }) {
+export default function AuthBrandPanel({ view, donors }) {
   const stats = [
     [donors, "Registered donors"],
     ["< 60s", "Alert speed"],
@@ -16,15 +14,6 @@ export default function AuthBrandPanel({ view, donors, onBack }) {
         className="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none"
       />
       <div className="relative z-10">
-        <button
-          type="button"
-          onClick={onBack}
-          className="flex items-center gap-2 text-red-300 hover:text-white
-                     transition-colors mb-14 text-sm font-medium bg-transparent border-0 p-0 cursor-pointer"
-        >
-          <ArrowLeft size={14} />
-          Back
-        </button>
         <div className="flex items-center gap-2 mb-10">
           <div className="w-9 h-9 bg-white/20 rounded-xl flex items-center justify-center">
             <img
@@ -41,7 +30,7 @@ export default function AuthBrandPanel({ view, donors, onBack }) {
         >
           {view === "login"
             ? "Good to have\nyou back."
-            : "Login and view the requests."}
+            : "Join our community of donors."}
         </h2>
         <p className="text-red-200 text-base leading-relaxed max-w-xs">
           {view === "login"
@@ -50,14 +39,15 @@ export default function AuthBrandPanel({ view, donors, onBack }) {
         </p>
       </div>
 
-      <div className="relative z-10 ">
+      <div className="relative z-10 max-w-xs">
         {stats.map(([value, label]) => (
           <div
             key={label}
-            className="flex items-center justify-between py-3.5
+            className="flex items-center gap-3 py-3.5
                        border-b border-red-500/40 last:border-0"
           >
             <span className="text-red-200 text-sm">{label}</span>
+            <span className="flex-1 border-t border-dotted border-red-300/60" aria-hidden="true" />
             <span
               className="font-mono font-bold text-white"
               style={{ fontFamily: "var(--font-code)" }}

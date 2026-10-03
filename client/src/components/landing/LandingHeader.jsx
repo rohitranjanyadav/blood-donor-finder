@@ -16,11 +16,11 @@ export default function LandingHeader({ menuOpen, onToggleMenu, onCloseMenu }) {
 
           <nav className="hidden md:flex items-center gap-8">
             {navLinks.map(([label, href]) => (
-              <a key={label} href={href} className="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">
+              <a key={label} href={href} className="text-[15px] font-semibold text-gray-600 hover:text-gray-900 transition-colors">
                 {label}
               </a>
             ))}
-            <Link to="/map" className="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">Live Map</Link>
+            <Link to="/map" className="text-[15px] font-semibold text-gray-600 hover:text-gray-900 transition-colors">Live Map</Link>
           </nav>
 
           <div className="hidden md:flex items-center gap-3">

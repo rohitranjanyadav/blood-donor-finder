@@ -1,4 +1,4 @@
-import { CheckCircle2, Droplets } from "lucide-react";
+import { Inbox, Droplets } from "lucide-react";
 
 export default function DonorEmptyState({ type, bloodGroup }) {
   const history = type === "history";
@@ -8,7 +8,7 @@ export default function DonorEmptyState({ type, bloodGroup }) {
       {history ? (
         <Droplets size={40} className="text-red-200 mx-auto mb-3" />
       ) : (
-        <CheckCircle2 size={40} className="text-green-400 mx-auto mb-3" />
+        <Inbox size={40} className="text-gray-300 mx-auto mb-3" aria-hidden="true" />
       )}
       <h3 className="font-semibold text-gray-600 text-sm">
         {history ? "No donations yet" : `No active requests for ${bloodGroup}`}

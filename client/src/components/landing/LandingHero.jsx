@@ -72,9 +72,9 @@ export default function LandingHero() {
               className="font-heading text-4xl lg:text-5xl text-gray-900 leading-[1.12] mb-6"
               style={{ fontFamily: "var(--font-heading)" }}
             >
-              Blood, when
+              <em className="text-red-600 not-italic">Blood</em>, when
               <br />
-              <em className="text-red-600 not-italic">it is needed</em>
+              it is needed
             </h1>
             <p className="text-lg text-gray-600 leading-relaxed mb-8 max-w-md">
               JeevanRakta connects donors to patients in under 60 seconds. Post
@@ -186,7 +186,7 @@ export default function LandingHero() {
                   </div>
                   <Link
                     to={`/requests/${request.request_id}`}
-                    className="block w-full bg-red-600 text-white text-sm font-semibold py-3 rounded-xl hover:bg-red-700 transition-colors text-center no-underline"
+                    className="inline-flex items-center justify-center bg-red-600 text-white text-sm font-semibold px-5 py-3 rounded-xl hover:bg-red-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 transition-colors no-underline"
                   >
                     View this request
                   </Link>

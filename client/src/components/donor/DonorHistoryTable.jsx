@@ -6,7 +6,7 @@ export default function DonorHistoryTable({ history, compact = false }) {
   return (
     <div className={compact ? "overflow-x-auto" : "bg-white border border-gray-100 rounded-2xl overflow-hidden"}>
       <div className={compact ? "" : "overflow-x-auto"}>
-        <table className="w-full text-sm">
+        <table className={`${compact ? "w-auto" : "w-full"} text-sm`}>
           <thead className={compact ? "" : "bg-gray-50"}>
             <tr>
               {!compact && <th className="text-left text-[11px] font-semibold text-gray-400 px-5 py-3 uppercase tracking-wide">#</th>}

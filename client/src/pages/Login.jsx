@@ -126,15 +126,16 @@ export default function Login() {
       className="min-h-screen bg-gray-50 flex"
       style={{ fontFamily: "var(--font-body)" }}
     >
-      <AuthBrandPanel view={view} donors={donorCount} onBack={goBack} />
+      <AuthBrandPanel view={view} donors={donorCount} />
 
       <main className="flex-1 flex flex-col justify-center px-6 py-12 lg:px-14 xl:px-20">
         <div className="max-w-md w-full mx-auto">
           <button
             type="button"
             onClick={goBack}
-            className="flex items-center gap-1.5 text-gray-400 hover:text-gray-700
-                       mb-8 lg:hidden text-sm bg-transparent border-0 p-0"
+            className="flex items-center gap-1.5 text-gray-500 hover:text-gray-900
+                       mb-8 text-sm font-medium bg-transparent border-0 p-0
+                       focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 rounded"
           >
             <ArrowLeft size={13} /> Back
           </button>
@@ -142,7 +143,7 @@ export default function Login() {
           <h1 className="text-2xl font-bold text-gray-900 mb-1">
             {view === "login" ? "Sign in" : "Create account"}
           </h1>
-          <p className="text-gray-500 text-sm mb-8">
+          <p className="text-gray-600 text-base mb-8">
             {view === "login" ? "No account? " : "Already registered? "}
             <Link
               to={view === "login" ? "/register/donor" : "/login"}
