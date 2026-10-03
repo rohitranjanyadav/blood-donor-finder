@@ -30,9 +30,9 @@ export const steps = [
 ];
 
 export const roleCards = [
-  { title: "Donor", href: "/register/donor", color: "bg-red-600", image: "/assets/icons/role-donor.svg", items: ["Nearby requests map", "Availability toggle", "Donation history", "Email alerts"] },
-  { title: "Patient", href: "/register/patient", color: "bg-blue-600", image: "/assets/icons/role-patient.svg", items: ["Post request in 3 steps", "Live status updates", "Donor responses", "Request timeline"] },
-  { title: "Hospital", href: "/register/hospital", color: "bg-green-600", image: "/assets/icons/role-hospital.svg", items: ["Verified hospital badge", "Multi-unit requests", "Response analytics", "Blood group demand chart"] },
+  { title: "Donor", href: "/register/donor", color: "bg-red-600", buttonColor: "bg-red-600 hover:bg-red-700 focus-visible:outline-red-600", image: "/assets/icons/role-donor.svg", items: ["Nearby requests map", "Availability toggle", "Donation history", "Email alerts"] },
+  { title: "Patient", href: "/register/patient", color: "bg-blue-600", buttonColor: "bg-blue-600 hover:bg-blue-700 focus-visible:outline-blue-600", image: "/assets/icons/role-patient.svg", items: ["Post request in 3 steps", "Live status updates", "Donor responses", "Request timeline"] },
+  { title: "Hospital", href: "/register/hospital", color: "bg-green-600", buttonColor: "bg-green-600 hover:bg-green-700 focus-visible:outline-green-600", image: "/assets/icons/role-hospital.svg", items: ["Verified hospital badge", "Multi-unit requests", "Response analytics", "Blood group demand chart"] },
 ];
 
 export const testimonials = [

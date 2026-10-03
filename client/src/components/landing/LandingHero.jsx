@@ -95,7 +95,7 @@ export default function LandingHero() {
                 Request blood <ArrowRight size={15} />
               </Link>
             </div>
-            <div className="grid grid-cols-2 gap-6 pt-8 border-t border-gray-100">
+            <div className="grid grid-cols-2 gap-3 mt-2 rounded-2xl border border-gray-200 bg-white/75 p-4 sm:p-5 shadow-sm">
               {[
                 ["< 60s", "Alert speed"],
                 ["100%", "Free to use"],
@@ -184,12 +184,14 @@ export default function LandingHero() {
                       </span>
                     </div>
                   </div>
-                  <Link
-                    to={`/requests/${request.request_id}`}
-                    className="inline-flex items-center justify-center bg-red-600 text-white text-sm font-semibold px-5 py-3 rounded-xl hover:bg-red-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 transition-colors no-underline"
-                  >
-                    View this request
-                  </Link>
+                  <div className="border-t border-gray-100 pt-4">
+                    <Link
+                      to={`/requests/${request.request_id}`}
+                      className="inline-flex w-full min-h-12 items-center justify-center gap-2 bg-red-600 text-white text-sm font-semibold px-5 py-3 rounded-xl hover:bg-red-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 transition-colors no-underline"
+                    >
+                      View live request <ArrowRight size={15} aria-hidden="true" />
+                    </Link>
+                  </div>
                 </>
               ) : (
                 <div className="py-10 text-center">
