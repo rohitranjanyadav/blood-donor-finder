@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { MapContainer, TileLayer, Marker, Popup, Circle } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { Link } from "react-router-dom";
-import { Droplets, Clock, MapPin, AlertCircle, RefreshCw } from "lucide-react";
+import { Clock, MapPin, AlertCircle, RefreshCw } from "lucide-react";
 import Spinner from "../components/ui/Spinner";
 import api from "../api/axios";
 
