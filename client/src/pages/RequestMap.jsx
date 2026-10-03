@@ -60,12 +60,12 @@ export default function RequestMap() {
   const withCoords = filtered.filter(r => r.latitude && r.longitude)
 
   return (
-    <div className="h-screen flex flex-col bg-gray-50"
+    <div className="h-[calc(100vh-4rem)] min-h-[680px] flex flex-col bg-gray-50"
          style={{ fontFamily: 'var(--font-body)' }}>
 
       {/* Header */}
-      <div className="bg-white border-b border-gray-100 px-4 lg:px-6 py-3
-                      flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+      <div className="bg-white border-b border-gray-100 px-3 sm:px-4 lg:px-6 py-3
+              flex flex-col lg:flex-row lg:items-center justify-between gap-3 shrink-0">
         <div>
           <h1 className="font-semibold text-gray-900 text-sm">Live Blood Request Map</h1>
           <p className="text-[11px] text-gray-400 mt-0.5">
@@ -74,9 +74,9 @@ export default function RequestMap() {
           </p>
         </div>
 
-        <div className="flex items-center gap-2 flex-wrap">
+        <div className="flex items-center gap-2 min-w-0 w-full lg:w-auto overflow-x-auto pb-1">
           {/* Blood group filter */}
-          <div className="flex gap-1 flex-wrap">
+          <div className="flex gap-1 shrink-0">
             {BLOOD_GROUPS.map(bg => (
               <button key={bg}
                 onClick={() => setFilterBG(bg)}
@@ -116,10 +116,10 @@ export default function RequestMap() {
         </div>
       </div>
 
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-1 min-h-0 flex-col lg:flex-row overflow-y-auto lg:overflow-hidden">
 
         {/* Map */}
-        <div className="flex-1 relative">
+        <div className="h-[55vh] min-h-[360px] lg:h-auto lg:flex-1 relative shrink-0">
           {loading ? (
             <div className="absolute inset-0 bg-white/80 flex items-center
                             justify-center z-10">
@@ -208,8 +208,8 @@ export default function RequestMap() {
         </div>
 
         {/* Sidebar */}
-        <div className="hidden lg:flex flex-col w-80 bg-white border-l
-                        border-gray-100 overflow-hidden">
+        <div className="flex flex-col w-full lg:w-80 lg:border-l border-gray-100
+            bg-white overflow-hidden min-h-0 max-h-[45vh] lg:max-h-none shrink-0">
           <div className="px-4 py-3 border-b border-gray-100">
             <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
               {filtered.length} Active Request{filtered.length !== 1 ? 's' : ''}

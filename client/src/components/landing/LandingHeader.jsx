@@ -39,6 +39,13 @@ export default function LandingHeader({ menuOpen, onToggleMenu, onCloseMenu }) {
           {navLinks.map(([label, href]) => (
             <a key={label} href={href} onClick={onCloseMenu} className="block text-sm text-gray-700 py-2.5 border-b border-gray-50 last:border-0">{label}</a>
           ))}
+          <Link
+            to="/map"
+            onClick={onCloseMenu}
+            className="block text-sm text-gray-700 py-2.5 border-b border-gray-50 no-underline"
+          >
+            Live Map
+          </Link>
           <div className="flex gap-2 pt-3">
             <Link to="/login" onClick={onCloseMenu} className="flex-1 border border-gray-200 text-sm font-medium py-2.5 rounded-xl text-center no-underline text-gray-700">Sign in</Link>
             <Link to="/register/donor" onClick={onCloseMenu} className="flex-1 bg-red-600 text-white text-sm font-semibold py-2.5 rounded-xl text-center no-underline">Register</Link>

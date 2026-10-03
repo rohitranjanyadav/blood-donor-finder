@@ -1,17 +1,20 @@
+import { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { LogOut, Map, Settings, User } from "lucide-react";
+import { LogOut, Map, Menu, Settings, User, X } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
 
 const Navbar = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const handleLogout = () => {
     logout();
     navigate("/");
   };
   const isActive = (path) => location.pathname === path;
+  const closeMenu = () => setMenuOpen(false);
 
   const linkClass = (path) =>
     `px-3 py-2 rounded-lg text-sm font-medium transition-colors no-underline ${
@@ -43,7 +46,7 @@ const Navbar = () => {
       </Link>
 
       {/* Right side links */}
-      <div className="flex items-center gap-1 sm:gap-2">
+      <div className="hidden md:flex items-center gap-1 sm:gap-2">
         <Link to="/map" className={linkClass("/map")}>
           <span className="flex items-center gap-1.5">
             <Map size={15} /> Live Map
@@ -121,6 +124,28 @@ const Navbar = () => {
           </div>
         )}
       </div>
+      <button
+        type="button"
+        onClick={() => setMenuOpen((open) => !open)}
+        className="md:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-50"
+        aria-label="Toggle navigation menu"
+      >
+        {menuOpen ? <X size={20} /> : <Menu size={20} />}
+      </button>
+
+      {menuOpen && (
+        <div className="md:hidden absolute top-16 inset-x-0 bg-white border-b border-gray-100 shadow-lg p-3 space-y-1">
+          <Link to="/map" onClick={closeMenu} className={`${linkClass("/map")} flex items-center gap-2`}><Map size={15} /> Live Map</Link>
+          {!user && <>
+            <Link to="/login" onClick={closeMenu} className={linkClass("/login")}>Login</Link>
+            <Link to="/register/donor" onClick={closeMenu} className="block bg-red-600 text-white px-3 py-2 rounded-lg text-sm font-semibold no-underline">Register as Donor</Link>
+          </>}
+          {user?.role === "donor" && <Link to="/dashboard" onClick={closeMenu} className={linkClass("/dashboard")}>Dashboard</Link>}
+          {(user?.role === "patient" || user?.role === "hospital") && <Link to="/requests/new" onClick={closeMenu} className={linkClass("/requests/new")}>+ Post Request</Link>}
+          {user?.role === "admin" && <Link to="/admin" onClick={closeMenu} className={linkClass("/admin")}>Admin</Link>}
+          {user && <button onClick={() => { closeMenu(); handleLogout(); }} className="w-full text-left flex items-center gap-2 text-gray-600 px-3 py-2 rounded-lg text-sm hover:bg-gray-50"><LogOut size={15} /> Logout</button>}
+        </div>
+      )}
     </nav>
   );
 };

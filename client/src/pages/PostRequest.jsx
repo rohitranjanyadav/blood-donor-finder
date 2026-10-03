@@ -186,7 +186,7 @@ export default function PostRequest() {
           <div className="bg-white border border-gray-100 rounded-2xl p-5 space-y-4">
             <h3 className="font-semibold text-gray-800 text-sm">Request Details</h3>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs font-semibold text-gray-600 mb-1.5">
                   Quantity (units)

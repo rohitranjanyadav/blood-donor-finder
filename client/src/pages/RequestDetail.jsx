@@ -90,7 +90,7 @@ export default function RequestDetail() {
         {/* Header card */}
         <div className="bg-white border border-gray-100 rounded-2xl p-6 mb-5
                         shadow-sm">
-          <div className="flex items-start justify-between gap-4 mb-5">
+          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-5">
             <div className="flex items-center gap-4">
               <div className="w-14 h-14 bg-red-50 rounded-2xl flex items-center
                               justify-center shrink-0">
@@ -119,7 +119,7 @@ export default function RequestDetail() {
                 </h1>
               </div>
             </div>
-            <div className="text-right shrink-0">
+            <div className="text-left sm:text-right shrink-0">
               <p className="text-xs text-gray-400 mb-1">Donors alerted</p>
               <p className="font-mono text-2xl font-bold text-gray-900"
                  style={{ fontFamily: 'var(--font-code)' }}>
